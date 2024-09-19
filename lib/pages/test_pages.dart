@@ -1,10 +1,16 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
+import 'package:budaya_bengkulu/models/question_model.dart';
+import 'package:budaya_bengkulu/pages/hasil_test.dart';
 import 'package:countdown_progress_indicator/countdown_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 class TestPage extends StatefulWidget {
-  const TestPage({super.key});
+  final QuestionModel questionModel;
+  final String username;
+  const TestPage(
+      {Key? key, required this.questionModel, required this.username})
+      : super(key: key);
 
   @override
   State<TestPage> createState() => _TestPageState();
@@ -12,6 +18,32 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
   final _controller = CountDownController();
+  int index = 0;
+  int result = 0;
+
+  void navigate(String optionChar) {
+    setState(() {
+      if (optionChar == widget.questionModel.data[index].correctOption) {
+        result++;
+      }
+      index++;
+
+      if (index == widget.questionModel.data.length) {
+        Navigator.of(context)
+            .push(MaterialPageRoute(
+                builder: (context) => HasilPage(
+                      result: result,
+                    )))
+            .then(
+          (value) {
+            setState(() {});
+          },
+        );
+      }
+      ;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
@@ -26,11 +58,11 @@ class _TestPageState extends State<TestPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "1 / 5",
+                    '${index + 1} / ${widget.questionModel.data.length.toString()}',
                     style: TextStyle(fontSize: 18),
                   ),
                   Text(
-                    "Alpian",
+                    widget.username,
                     style: TextStyle(fontSize: 18),
                   )
                 ]),
@@ -43,15 +75,26 @@ class _TestPageState extends State<TestPage> {
               valueColor: Colors.red,
               backgroundColor: Colors.blue,
               initialPosition: 0,
-              duration: 365,
+              duration: 360,
               timeFormatter: (seconds) {
-                return Duration(seconds: seconds)
-                    .toString()
-                    .split('.')[0]
-                    .padLeft(8, '0');
+                Duration duration = Duration(seconds: seconds);
+                String twoDigits(int n) => n.toString().padLeft(2, '0');
+                String minutes = twoDigits(duration.inMinutes.remainder(60));
+                String secs = twoDigits(duration.inSeconds.remainder(60));
+                return "$minutes:$secs";
               },
-              text: 'hh:mm:ss',
-              onComplete: () => null,
+              onComplete: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(
+                        builder: (context) => HasilPage(
+                              result: result,
+                            )))
+                    .then(
+                  (value) {
+                    setState(() {});
+                  },
+                );
+              },
             ),
           ),
           SizedBox(
@@ -59,36 +102,46 @@ class _TestPageState extends State<TestPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text("Ibukota Negara Indonesia Adalah...",
+            child: Text(widget.questionModel.data[index].question,
                 textAlign: TextAlign.center, style: TextStyle(fontSize: 22)),
           ),
           SizedBox(
             height: 50,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              navigate("a");
+            },
             child: OptionWidget(
                 optionChar: "A",
-                optionDetail: "Ibukota Nusantara (IKN)",
+                optionDetail: widget.questionModel.data[index].optionA,
                 color: Colors.red),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              navigate("b");
+            },
             child: OptionWidget(
-                optionChar: "B", optionDetail: "Jakarta", color: Colors.blue),
+                optionChar: "B",
+                optionDetail: widget.questionModel.data[index].optionB,
+                color: Colors.blue),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              navigate("c");
+            },
             child: OptionWidget(
                 optionChar: "C",
-                optionDetail: "Jogjakarta",
+                optionDetail: widget.questionModel.data[index].optionC,
                 color: Colors.black),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              navigate("d");
+            },
             child: OptionWidget(
                 optionChar: "D",
-                optionDetail: "Bandung)",
+                optionDetail: widget.questionModel.data[index].optionD,
                 color: Colors.orange),
           ),
         ],
