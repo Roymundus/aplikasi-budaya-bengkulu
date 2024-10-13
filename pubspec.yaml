@@ -75,6 +75,8 @@ flutter:
     - assets/splash.png
     - assets/background.mp3
     - assets/best-seller.png
+    - assets/backgroundHomePage.png
+    - assets/background-kuis.png
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
