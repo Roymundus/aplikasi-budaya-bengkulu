@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:budaya_bengkulu/models/question_model.dart';
 import 'package:budaya_bengkulu/pages/hasil_test.dart';
 import 'package:countdown_progress_indicator/countdown_progress_indicator.dart';
@@ -40,113 +38,143 @@ class _TestPageState extends State<TestPage> {
           },
         );
       }
-      ;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
     return Scaffold(
-        body: SafeArea(
-      child: Column(
+      appBar: AppBar(
+        title: const Text(
+          "Kuis Kebudayaan Bengkulu",
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop(); // Kembali ke halaman sebelumnya
+          },
+        ),
+        backgroundColor: Colors.green, // Sesuaikan warna sesuai keinginan
+      ),
+      body: Stack(
         children: [
-          // ignore: prefer_const_constructors
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${index + 1} / ${widget.questionModel.data.length.toString()}',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  Text(
-                    widget.username,
-                    style: TextStyle(fontSize: 18),
-                  )
-                ]),
-          ),
-          SizedBox(
-            height: 150,
-            width: 150,
-            child: CountDownProgressIndicator(
-              controller: _controller,
-              valueColor: Colors.red,
-              backgroundColor: Colors.blue,
-              initialPosition: 0,
-              duration: 360,
-              timeFormatter: (seconds) {
-                Duration duration = Duration(seconds: seconds);
-                String twoDigits(int n) => n.toString().padLeft(2, '0');
-                String minutes = twoDigits(duration.inMinutes.remainder(60));
-                String secs = twoDigits(duration.inSeconds.remainder(60));
-                return "$minutes:$secs";
-              },
-              onComplete: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(
-                        builder: (context) => HasilPage(
-                              result: result,
-                            )))
-                    .then(
-                  (value) {
-                    setState(() {});
-                  },
-                );
-              },
+          // Gambar latar belakang
+          Positioned.fill(
+            child: Opacity(
+              opacity: 1.0, // Transparansi gambar latar belakang
+              child: Image.asset(
+                'assets/background-kuis.png', // Pastikan gambar ada di folder assets
+                fit: BoxFit.cover, // Agar gambar menutupi seluruh layar
+              ),
             ),
           ),
-          SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(widget.questionModel.data[index].question,
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 22)),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          GestureDetector(
-            onTap: () {
-              navigate("a");
-            },
-            child: OptionWidget(
-                optionChar: "A",
-                optionDetail: widget.questionModel.data[index].optionA,
-                color: Colors.red),
-          ),
-          GestureDetector(
-            onTap: () {
-              navigate("b");
-            },
-            child: OptionWidget(
-                optionChar: "B",
-                optionDetail: widget.questionModel.data[index].optionB,
-                color: Colors.blue),
-          ),
-          GestureDetector(
-            onTap: () {
-              navigate("c");
-            },
-            child: OptionWidget(
-                optionChar: "C",
-                optionDetail: widget.questionModel.data[index].optionC,
-                color: Colors.black),
-          ),
-          GestureDetector(
-            onTap: () {
-              navigate("d");
-            },
-            child: OptionWidget(
-                optionChar: "D",
-                optionDetail: widget.questionModel.data[index].optionD,
-                color: Colors.orange),
+          SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${index + 1} / ${widget.questionModel.data.length.toString()}',
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
+                        ),
+                        Text(
+                          widget.username,
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
+                        ),
+                      ]),
+                ),
+                SizedBox(
+                  height: 150,
+                  width: 150,
+                  child: CountDownProgressIndicator(
+                    controller: _controller,
+                    valueColor: Colors.red,
+                    backgroundColor: const Color.fromARGB(255, 2, 87, 5),
+                    initialPosition: 0,
+                    duration: 360,
+                    timeFormatter: (seconds) {
+                      Duration duration = Duration(seconds: seconds);
+                      String twoDigits(int n) => n.toString().padLeft(2, '0');
+                      String minutes =
+                          twoDigits(duration.inMinutes.remainder(60));
+                      String secs = twoDigits(duration.inSeconds.remainder(60));
+                      return "$minutes:$secs";
+                    },
+                    onComplete: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(
+                              builder: (context) => HasilPage(
+                                    result: result,
+                                  )))
+                          .then(
+                        (value) {
+                          setState(() {});
+                        },
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 50),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    widget.questionModel.data[index].question,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 22, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 50),
+                GestureDetector(
+                  onTap: () {
+                    navigate("a");
+                  },
+                  child: OptionWidget(
+                    optionChar: "A",
+                    optionDetail: widget.questionModel.data[index].optionA,
+                    color: Color.fromARGB(255, 17, 147, 21),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    navigate("b");
+                  },
+                  child: OptionWidget(
+                    optionChar: "B",
+                    optionDetail: widget.questionModel.data[index].optionB,
+                    color: Color.fromARGB(255, 2, 87, 5),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    navigate("c");
+                  },
+                  child: OptionWidget(
+                    optionChar: "C",
+                    optionDetail: widget.questionModel.data[index].optionC,
+                    color: Color.fromARGB(255, 17, 147, 21),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    navigate("d");
+                  },
+                  child: OptionWidget(
+                    optionChar: "D",
+                    optionDetail: widget.questionModel.data[index].optionD,
+                    color: Color.fromARGB(255, 2, 87, 5),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
-    ));
+    );
   }
 }
 
@@ -166,26 +194,25 @@ class OptionWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
+        decoration:
+            BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(children: [
             Text(
               optionChar,
-              style: TextStyle(fontSize: 18, color: Colors.white),
+              style: const TextStyle(fontSize: 18, color: Colors.white),
             ),
-            SizedBox(
-              width: 20,
-            ),
+            const SizedBox(width: 20),
             Expanded(
               child: Text(
                 optionDetail,
                 textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style: const TextStyle(fontSize: 18, color: Colors.white),
               ),
             )
           ]),
         ),
-        decoration: BoxDecoration(color: color),
       ),
     );
   }
