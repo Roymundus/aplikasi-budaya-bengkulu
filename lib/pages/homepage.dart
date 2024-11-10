@@ -1,4 +1,5 @@
 import 'package:budaya_bengkulu/pages/homekuis.dart';
+import 'package:budaya_bengkulu/pages/pilih_kabupaten.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,38 +12,35 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.green,
       ),
       body: Stack(
-        // Menggunakan Stack untuk menambah ornamen latar belakang
         children: [
           // Gambar latar belakang
           Positioned.fill(
             child: Opacity(
-              opacity: 1.0, // Opacity untuk menyesuaikan transparansi gambar
+              opacity: 1.0,
               child: Image.asset(
-                'assets/backgroundHomePage.png', // Pastikan Anda sudah memiliki gambar ini di assets
+                'assets/backgroundHomePage.png',
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          // Konten utama
           Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: GridView.count(
-                crossAxisCount: 2, // Menampilkan 2 menu dalam satu baris
+                crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                shrinkWrap: true, // Agar grid menyesuaikan dengan konten
+                shrinkWrap: true,
                 children: [
                   MenuCard(
                     title: 'Menu Kabupaten',
                     icon: Icons.map_outlined,
                     color: Colors.white,
                     onTap: () {
-                      // Arahkan ke halaman pemilihan kabupaten
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => KabupatenScreen()));
+                              builder: (context) => KabupatenSelectionPage()));
                     },
                   ),
                   MenuCard(
