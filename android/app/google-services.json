@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "150169113255",
+    "firebase_url": "https://budaya-bengkulu-34fe6-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "budaya-bengkulu-34fe6",
+    "storage_bucket": "budaya-bengkulu-34fe6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150169113255:android:2b8ab4a8857009f88a8182",
+        "android_client_info": {
+          "package_name": "com.example.budaya_bengkulu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ5seev6HSq-L3Ko_OmzHlvEVPFjU3LxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
