@@ -69,7 +69,7 @@ class _KabupatenSelectionPageState extends State<KabupatenSelectionPage> {
           : kabupatenList.isEmpty
               ? const Center(child: Text("Tidak ada data tersedia"))
               : Container(
-                  color: Colors.green,
+                  color: Colors.white,
                   child: GridView.builder(
                     padding: const EdgeInsets.all(16.0),
                     gridDelegate:
@@ -129,6 +129,10 @@ class KabupatenGridItem extends StatelessWidget {
             ),
           ],
           color: Colors.white,
+          border: Border.all(
+            color: Colors.green,
+            width: 2,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
