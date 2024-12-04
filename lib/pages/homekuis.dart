@@ -60,7 +60,7 @@ class _HomePageState extends State<HomeKuis> {
           },
         ),
         title: Align(
-          alignment: Alignment.centerLeft, // Mengatur agar judul rata kiri
+          alignment: Alignment.centerLeft,
           child: const Text('Kuis Ensiklopedia Budaya Bengkulu'),
         ),
       ),
@@ -69,9 +69,9 @@ class _HomePageState extends State<HomeKuis> {
           // Gambar latar belakang
           Positioned.fill(
             child: Opacity(
-              opacity: 1.0, // Transparansi gambar
+              opacity: 1.0,
               child: Image.asset(
-                'assets/backgroundHomePage.png', // Pastikan gambar ada di folder assets
+                'assets/backgroundHomePage.png',
                 fit: BoxFit.cover,
               ),
             ),
