@@ -59,16 +59,16 @@ class _TestPageState extends State<TestPage> {
       ),
       body: Stack(
         children: [
-          // Gambar latar belakang
-          Positioned.fill(
-            child: Opacity(
-              opacity: 1.0,
-              child: Image.asset(
-                'assets/background-kuis.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          // // Gambar latar belakang
+          // Positioned.fill(
+          //   child: Opacity(
+          //     opacity: 1.0,
+          //     child: Image.asset(
+          //       'assets/background-kuis.png',
+          //       fit: BoxFit.cover,
+          //     ),
+          //   ),
+          // ),
           SafeArea(
             child: LayoutBuilder(
               builder: (context, constraints) {
@@ -88,12 +88,12 @@ class _TestPageState extends State<TestPage> {
                                 Text(
                                   '${index + 1} / ${widget.questionModel.data.length.toString()}',
                                   style: const TextStyle(
-                                      fontSize: 18, color: Colors.white),
+                                      fontSize: 25, color: Colors.black),
                                 ),
                                 Text(
                                   widget.username,
                                   style: const TextStyle(
-                                      fontSize: 18, color: Colors.white),
+                                      fontSize: 20, color: Colors.black),
                                 ),
                               ],
                             ),
@@ -104,8 +104,7 @@ class _TestPageState extends State<TestPage> {
                             child: CountDownProgressIndicator(
                               controller: _controller,
                               valueColor: Colors.red,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 28, 168, 33),
+                              backgroundColor: Color.fromARGB(255, 5, 188, 30),
                               initialPosition: 0,
                               duration: 360,
                               timeFormatter: (seconds) {
@@ -140,7 +139,7 @@ class _TestPageState extends State<TestPage> {
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontSize: 22,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -218,37 +217,47 @@ class OptionWidget extends StatelessWidget {
     required this.optionChar,
     required this.optionDetail,
     required this.color,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
-        decoration:
-            BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Colors.green,
+            width: 3,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Row(children: [
-            Text(
-              optionChar,
-              style: const TextStyle(
+          child: Row(
+            children: [
+              Text(
+                optionChar,
+                style: const TextStyle(
                   fontSize: 18,
                   color: Color.fromARGB(255, 18, 80, 20),
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: Text(
-                optionDetail,
-                textAlign: TextAlign.left,
-                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Text(
+                  optionDetail,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Color.fromARGB(255, 18, 80, 20),
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            )
-          ]),
+            ],
+          ),
         ),
       ),
     );
