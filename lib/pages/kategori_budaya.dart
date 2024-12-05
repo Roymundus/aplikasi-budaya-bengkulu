@@ -1,67 +1,81 @@
 import 'package:budaya_bengkulu/pages/adat_istiadat.dart';
 import 'package:budaya_bengkulu/pages/bahasa_daerah.dart';
 import 'package:budaya_bengkulu/pages/kesenian.dart';
+import 'package:budaya_bengkulu/pages/pilih_kabupaten.dart';
 import 'package:flutter/material.dart';
 
 class KategoriBudayaPage extends StatelessWidget {
+  final KabupatenModel kabupaten;
+
+  const KategoriBudayaPage({Key? key, required this.kabupaten})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kategori Budaya"),
+        title: Text("Kategori Budaya (${kabupaten.name})"),
         backgroundColor: Colors.green,
       ),
       body: Container(
-        color: Colors.green, // Latar belakang hijau
-        child: ListView(
-          padding: const EdgeInsets.all(16.0),
+        color: Colors.white,
+        child: Column(
           children: [
-            _buildKategoriCard(
-              context,
-              title: "Bahasa Daerah",
-              description:
-                  "Pelajari lebih dalam tentang Bahasa Daerah di Bengkulu.",
-              imagePath: 'assets/aksara-kaganga.jpg',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailBahasaPage(),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(16.0),
+                children: [
+                  _buildKategoriCard(
+                    context,
+                    title: "Bahasa Daerah",
+                    description:
+                        "Pelajari lebih dalam tentang Bahasa Daerah di ${kabupaten.name}.",
+                    imagePath: 'assets/aksara-kaganga.jpg',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailBahasaPage(
+                            kabupaten: kabupaten,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            _buildKategoriCard(
-              context,
-              title: "Kesenian",
-              description:
-                  "Jelajahi berbagai kesenian tradisional dari Bengkulu.",
-              imagePath: 'assets/kesenian.jpg',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailKesenianPage(),
+                  const SizedBox(height: 16),
+                  _buildKategoriCard(
+                    context,
+                    title: "Kesenian",
+                    description:
+                        "Jelajahi berbagai kesenian tradisional dari ${kabupaten.name}.",
+                    imagePath: 'assets/kesenian.jpg',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailKesenianPage(),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            _buildKategoriCard(
-              context,
-              title: "Adat Istiadat",
-              description:
-                  "Pahami adat istiadat dan tradisi masyarakat Bengkulu.",
-              imagePath: 'assets/adat_istiadat.jpg',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AdatIstiadatPage(),
+                  const SizedBox(height: 16),
+                  _buildKategoriCard(
+                    context,
+                    title: "Adat Istiadat",
+                    description:
+                        "Pahami adat istiadat dan tradisi masyarakat ${kabupaten.name}.",
+                    imagePath: 'assets/adat_istiadat.jpg',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AdatIstiadatPage(),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ],
+              ),
             ),
           ],
         ),
@@ -79,6 +93,10 @@ class KategoriBudayaPage extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
+          side: BorderSide(
+            color: Colors.green, // Warna hijau untuk stroke
+            width: 2, // Ketebalan stroke
+          ),
         ),
         elevation: 5,
         child: Column(
