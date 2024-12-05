@@ -81,16 +81,20 @@ flutter:
     - assets/best-seller.png
     - assets/backgroundHomePage.png
     - assets/background-kuis.png
-    - assets/logo-kabupaten/Lambang_Kabupaten_Bengkulu_Tengah.png
-    - assets/logo-kabupaten/Bengkulu_Selatan.png
-    - assets/logo-kabupaten/50px-Kota_Bengkulu.png
-    - assets/logo-kabupaten/50px-Seluma.png
-    - assets/logo-kabupaten/50px-Rejang_Lebong.png
-    - assets/logo-kabupaten/50px-Lebong.png
-    - assets/logo-kabupaten/50px-Kabupaten_Kaur.png
-    - assets/logo-kabupaten/Logo_Bengkulu_Utara.png
-    - assets/logo-kabupaten/kepahiang.png
-    - assets/logo-kabupaten/Logo_Mukomuko.png
+    # - assets/logo-kabupaten/Lambang_Kabupaten_Bengkulu_Tengah.png
+    # - assets/logo-kabupaten/Bengkulu_Selatan.png
+    # - assets/logo-kabupaten/50px-Kota_Bengkulu.png
+    # - assets/logo-kabupaten/50px-Seluma.png
+    # - assets/logo-kabupaten/50px-Rejang_Lebong.png
+    # - assets/logo-kabupaten/50px-Lebong.png
+    # - assets/logo-kabupaten/50px-Kabupaten_Kaur.png
+    # - assets/logo-kabupaten/Logo_Bengkulu_Utara.png
+    # - assets/logo-kabupaten/kepahiang.png
+    # - assets/logo-kabupaten/Logo_Mukomuko.png
+    - assets/music3.jpg
+    - assets/367ba491fe4460d44becee0e83083c2b.jpg
+    - assets/kerambit_169.jpeg
+    - assets/608baa9936f63.png
     - assets/kesenian.jpg
     - assets/adat_istiadat.jpg
     - assets/aksara-kaganga.jpg
