@@ -229,7 +229,7 @@ class OptionWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: Colors.green,
-            width: 3,
+            width: 2,
           ),
         ),
         child: Padding(
