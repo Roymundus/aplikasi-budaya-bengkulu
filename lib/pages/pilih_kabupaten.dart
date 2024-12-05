@@ -114,7 +114,7 @@ class KabupatenGridItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => KategoriBudayaPage(),
+            builder: (context) => KategoriBudayaPage(kabupaten: kabupaten),
           ),
         );
       },
