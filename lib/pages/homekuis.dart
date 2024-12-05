@@ -103,7 +103,9 @@ class _HomePageState extends State<HomeKuis> {
                       ),
                     ),
                     isLoading
-                        ? const CircularProgressIndicator()
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          )
                         : ElevatedButton(
                             onPressed: () {
                               getAllData(usernameController.text);
