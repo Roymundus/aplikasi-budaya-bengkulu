@@ -1,85 +1,113 @@
 import 'package:flutter/material.dart';
 
 class DetailKesenianPage extends StatelessWidget {
-  const DetailKesenianPage({
-    Key? key,
-  }) : super(key: key);
+  final List<KesenianDetailModel> kesenianDetails = [
+    KesenianDetailModel(
+      'Lagu Daerah',
+      'Lagu daerah adalah lagu-lagu tradisional yang sangat identik dengan budaya dan identitas suatu daerah. Lagu ini biasa dimainkan pada acara-acara tertentu yang berhubungan dengan budaya dan adat.',
+      'assets/music3.jpg',
+    ),
+    KesenianDetailModel(
+      'Pakaian Adat',
+      'Pakaian adat merupakan simbol budaya dan identitas dari suatu daerah. Setiap daerah memiliki pakaian adat yang berbeda-beda, yang biasanya dipakai dalam acara resmi atau upacara adat.',
+      'assets/367ba491fe4460d44becee0e83083c2b.jpg',
+    ),
+    KesenianDetailModel(
+      'Senjata Tradisional',
+      'Senjata tradisional adalah alat yang digunakan oleh masyarakat adat untuk keperluan berburu, pertahanan, dan sebagai simbol kekuatan atau status sosial.',
+      'assets/kerambit_169.jpeg',
+    ),
+    KesenianDetailModel(
+      'Tarian Tradisional',
+      'Tarian tradisional adalah tarian yang diwariskan turun-temurun dan menjadi bagian tak terpisahkan dari kebudayaan daerah. Setiap daerah memiliki tarian khas yang menggambarkan nilai-nilai budaya dan sejarah daerah tersebut.',
+      'assets/608baa9936f63.png',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kesenian: "),
+        title: const Text("Kesenian Daerah"),
         backgroundColor: Colors.green,
       ),
-      body: Stack(
-        children: [
-          // Gambar latar belakang dengan transparansi
-          Positioned.fill(
-            child: Opacity(
-              opacity: 0.2, // Transparansi gambar latar belakang
-              child:
-                  Image.asset('assets/background-kuis.png', fit: BoxFit.cover),
-            ),
-          ),
-          SafeArea(
-            child: Container(
-              color: Colors.green, // Latar belakang hijau
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ListView(
+      body: Container(
+        color: Colors.white, // Background color of the page
+        child: ListView.builder(
+          padding: const EdgeInsets.all(16.0),
+          itemCount: kesenianDetails.length,
+          itemBuilder: (context, index) {
+            return KesenianDetailItem(kesenianDetail: kesenianDetails[index]);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class KesenianDetailModel {
+  final String title;
+  final String description;
+  final String imagePath;
+
+  KesenianDetailModel(this.title, this.description, this.imagePath);
+}
+
+class KesenianDetailItem extends StatelessWidget {
+  final KesenianDetailModel kesenianDetail;
+
+  const KesenianDetailItem({Key? key, required this.kesenianDetail})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        // Action on tapping the item, you can navigate to a detailed page
+      },
+      child: Card(
+        elevation: 5,
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        color: Colors.white, // Card background color
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Image.asset(
+                kesenianDetail.imagePath,
+                width: 80,
+                height: 80,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16),
-                    Center(
-                      child: Text(
-                        "Kesenian Daerah ",
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                        textAlign: TextAlign.center,
+                    Text(
+                      kesenianDetail.title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    _buildSectionTitle("Lagu Daerah"),
-                    const SizedBox(height: 16),
-                    _buildSectionTitle("Pakaian Adat"),
-                    const SizedBox(height: 16),
-                    _buildSectionTitle("Senjata Tradisional"),
-                    const SizedBox(height: 16),
-                    _buildSectionTitle("Tarian Tradisional"),
+                    const SizedBox(height: 8),
+                    Text(
+                      kesenianDetail.description,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
-    );
-  }
-
-  // Fungsi untuk membuat judul bagian
-  Widget _buildSectionTitle(String title) {
-    return Text(
-      title,
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: Colors.black87,
-      ),
-    );
-  }
-
-  // Fungsi untuk membuat deskripsi teks
-  Widget _buildDescriptionText(String description) {
-    return Text(
-      description,
-      style: const TextStyle(
-        fontSize: 16,
-        color: Colors.black54,
-      ),
-      textAlign: TextAlign.justify,
     );
   }
 }
