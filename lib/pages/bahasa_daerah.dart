@@ -1,19 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:budaya_bengkulu/pages/pilih_kabupaten.dart'; // Pastikan ada model Kabupaten
 
-class DetailBahasaPage extends StatelessWidget {
+class DetailBahasaPage extends StatefulWidget {
+  final KabupatenModel kabupaten;
+
   const DetailBahasaPage({
     Key? key,
+    required this.kabupaten,
   }) : super(key: key);
+
+  @override
+  _DetailBahasaPageState createState() => _DetailBahasaPageState();
+}
+
+class _DetailBahasaPageState extends State<DetailBahasaPage> {
+  final DatabaseReference database = FirebaseDatabase.instance.ref();
+  String ketnama = "Memuat data...";
+  String deskripsiBahasa = "Memuat deskripsi...";
+  String contohPertanyaan = "Memuat data...";
+  String contohJawaban = "Memuat data...";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchBahasaDaerah();
+  }
+
+  void fetchBahasaDaerah() async {
+    try {
+      // Membuat map untuk menggantikan nama kabupaten dengan ID
+      Map<String, String> kabupatenIdMap = {
+        "Bengkulu Selatan": "1",
+        "Bengkulu Tengah": "2",
+        "Kota Bengkulu": "3",
+        "Lebong": "4",
+        "Rejang Lebong": "5",
+        "Seluma": "6",
+        "Bengkulu Utara": "7",
+        "Mukomuko": "8",
+        "Kaur": "-OCWCcEeY0C4z88JFgtO",
+        "Kepahiang": "-OCWFWFbCiO_AWb1cFW8",
+      };
+
+      // Mendapatkan ID kabupaten berdasarkan nama
+      String kabupatenId = kabupatenIdMap[widget.kabupaten.name] ??
+          "default_id"; // ID default jika nama kabupaten tidak ditemukan
+
+      // Mengambil data dari Firebase menggunakan ID kabupaten
+      final snapshot = await database
+          .child(
+              "-OCW6dIqvmXRFCCware0/kabupaten/$kabupatenId/budaya/bahasa_daerah")
+          .get();
+
+      if (snapshot.value != null) {
+        final data = snapshot.value as Map<dynamic, dynamic>;
+
+        setState(() {
+          ketnama = data["nama"] ?? "Nama tidak tersedia.";
+          deskripsiBahasa = data["deskripsi"] ?? "Deskripsi tidak tersedia.";
+          contohPertanyaan =
+              data["contoh"]?["pertanyaan"] ?? "Tidak ada contoh pertanyaan.";
+          contohJawaban =
+              data["contoh"]?["jawaban"] ?? "Tidak ada contoh jawaban.";
+        });
+      } else {
+        setState(() {
+          ketnama = "Data tidak ditemukan.";
+          deskripsiBahasa = "Data tidak ditemukan.";
+          contohPertanyaan = "Data tidak ditemukan.";
+          contohJawaban = "Data tidak ditemukan.";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        ketnama = "Terjadi kesalahan saat memuat data.";
+        deskripsiBahasa = "Terjadi kesalahan saat memuat data.";
+        contohPertanyaan = "Terjadi kesalahan.";
+        contohJawaban = "Terjadi kesalahan.";
+      });
+      print("Error fetching bahasa daerah: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Bahasa Daerah"),
+        title: Text("Bahasa Daerah ${widget.kabupaten.name}"),
         backgroundColor: Colors.green,
       ),
       body: Container(
-        color: Colors.green, // Ubah warna latar belakang menjadi hijau
+        color: Colors.white,
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -22,65 +100,59 @@ class DetailBahasaPage extends StatelessWidget {
               children: [
                 Center(
                   child: Text(
-                    "Bahasa Daerah",
+                    ketnama,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors
-                          .white, // Ubah warna teks menjadi putih agar kontras
+                      color: Colors.black,
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Divider(
-                    color: Colors.white), // Ubah warna divider menjadi putih
+                const Divider(color: Colors.black),
                 const SizedBox(height: 16),
                 const Text(
                   "Deskripsi Bahasa:",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white, // Ubah warna teks menjadi putih
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  "Bahasa daerah adalah bahasa yang digunakan oleh masyarakat di suatu daerah tertentu. Bahasa daerah ini memiliki ciri khas tersendiri dan seringkali berbeda dengan bahasa Indonesia. Bahasa daerah juga merupakan bagian dari kekayaan budaya suatu daerah dan perlu dilestarikan agar tidak pun",
-                  style: TextStyle(
+                Text(
+                  deskripsiBahasa,
+                  style: const TextStyle(
                     fontSize: 16,
-                    color: Colors
-                        .white70, // Ubah warna teks menjadi putih dengan transparansi
+                    color: Colors.black,
                   ),
                   textAlign: TextAlign.justify,
                 ),
                 const SizedBox(height: 16),
-                const Divider(
-                    color: Colors.white), // Ubah warna divider menjadi putih
+                const Divider(color: Colors.black),
                 const SizedBox(height: 16),
                 const Text(
                   "Contoh Penggunaan:",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white, // Ubah warna teks menjadi putih
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  "1. Selamat pagi: \"Selamat pagi\" dalam bahasa daerah ini diucapkan sebagai \"...\"",
-                  style: TextStyle(
+                Text(
+                  "Pertanyaan: $contohPertanyaan",
+                  style: const TextStyle(
                     fontSize: 16,
-                    color: Colors
-                        .white70, // Ubah warna teks menjadi putih dengan transparansi
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  "2. Terima kasih: \"Terima kasih\" dalam bahasa daerah ini diucapkan sebagai \"...\"",
-                  style: TextStyle(
+                Text(
+                  "Jawaban: $contohJawaban",
+                  style: const TextStyle(
                     fontSize: 16,
-                    color: Colors
-                        .white70, // Ubah warna teks menjadi putih dengan transparansi
+                    color: Colors.black,
                   ),
                 ),
               ],
