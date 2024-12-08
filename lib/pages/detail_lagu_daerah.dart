@@ -16,8 +16,7 @@ class DetailLaguPage extends StatefulWidget {
 
 class _DetailLaguPageState extends State<DetailLaguPage> {
   final DatabaseReference database = FirebaseDatabase.instance.ref();
-  String ketnama = "Memuat data...";
-  String deskripsiLagu = "Memuat deskripsi...";
+  List<Map<String, dynamic>> laguList = [];
 
   @override
   void initState() {
@@ -52,20 +51,23 @@ class _DetailLaguPageState extends State<DetailLaguPage> {
         final data = snapshot.value as Map<dynamic, dynamic>;
 
         setState(() {
-          ketnama = data["nama"] ?? "Nama tidak tersedia.";
-          deskripsiLagu = data["deskripsi"] ?? "Deskripsi tidak tersedia.";
+          laguList = data.entries.map((entry) {
+            final lagu = entry.value as Map<dynamic, dynamic>;
+            return {
+              "nama": lagu["nama"] ?? "Nama tidak tersedia.",
+              "deskripsi": lagu["deskripsi"] ?? "Deskripsi tidak tersedia."
+            };
+          }).toList();
         });
       } else {
         setState(() {
-          ketnama = "Data tidak ditemukan.";
-          deskripsiLagu = "Data tidak ditemukan.";
+          laguList = [];
         });
       }
     } catch (e) {
       print("Error fetching data: $e");
       setState(() {
-        ketnama = "Error: $e";
-        deskripsiLagu = "Error: $e";
+        laguList = [];
       });
     }
   }
@@ -79,36 +81,100 @@ class _DetailLaguPageState extends State<DetailLaguPage> {
       ),
       body: Container(
         color: Colors.white,
-        padding: const EdgeInsets.all(16.0),
-        child: Card(
-          elevation: 4.0, // Optional: Add elevation for card shadow
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0), // Rounded corners
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  ketnama,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/header-lagu-daerah.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                alignment: Alignment.bottomLeft,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
+                ),
+                child: Text(
+                  widget.kabupaten.name,
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  deskripsiLagu,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.black54,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            // List lagu daerah
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: laguList.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: laguList.length,
+                        itemBuilder: (context, index) {
+                          final lagu = laguList[index];
+                          return Card(
+                            elevation: 4.0,
+                            margin: const EdgeInsets.only(bottom: 16.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.music_note,
+                                color: Colors.green,
+                                size: 36.0,
+                              ),
+                              title: Text(
+                                lagu["nama"] ?? "Nama tidak tersedia",
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              subtitle: Text(
+                                lagu["deskripsi"] ?? "Deskripsi tidak tersedia",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    : const Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.info_outline,
+                              size: 64.0,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(height: 16.0),
+                            Text(
+                              "Tidak ada data lagu daerah.",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black54,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+              ),
+            ),
+          ],
         ),
       ),
     );
