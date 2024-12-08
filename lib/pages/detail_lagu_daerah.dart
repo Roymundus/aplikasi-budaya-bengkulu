@@ -97,7 +97,7 @@ class _DetailLaguPageState extends State<DetailLaguPage> {
                 alignment: Alignment.bottomLeft,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+                    colors: [Colors.black.withOpacity(0.1), Colors.transparent],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ),
