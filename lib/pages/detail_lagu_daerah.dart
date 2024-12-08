@@ -126,6 +126,10 @@ class _DetailLaguPageState extends State<DetailLaguPage> {
                             margin: const EdgeInsets.only(bottom: 16.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
+                              side: BorderSide(
+                                color: Colors.green, // warna hijau untuk stroke
+                                width: 2.0, // ketebalan stroke
+                              ),
                             ),
                             child: ListTile(
                               leading: Icon(
