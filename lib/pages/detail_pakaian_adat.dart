@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:budaya_bengkulu/pages/pilih_kabupaten.dart';
@@ -193,13 +195,35 @@ class _DetailPakaianTradisionalPageState
                   ],
                 ),
               )
-            : const Center(
-                child: Text(
-                  "Data pakaian tradisional tidak tersedia.",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black54,
-                  ),
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.search_off,
+                      size: 100,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      "Data pakaian tradisional tidak tersedia.",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black54,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton.icon(
+                      onPressed: fetchPakaianTradisional,
+                      icon: const Icon(Icons.refresh),
+                      label: const Text("Coba Lagi"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green,
+                        onPrimary: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
       ),
