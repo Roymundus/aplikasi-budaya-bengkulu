@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 import 'package:budaya_bengkulu/models/question_model.dart';
 import 'package:budaya_bengkulu/pages/test_pages.dart';
