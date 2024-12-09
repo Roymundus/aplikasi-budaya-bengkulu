@@ -53,7 +53,9 @@ class KategoriBudayaPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailKesenianPage(),
+                          builder: (context) => DetailKesenianPage(
+                            kabupaten: kabupaten,
+                          ),
                         ),
                       );
                     },
@@ -69,7 +71,9 @@ class KategoriBudayaPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AdatIstiadatPage(),
+                          builder: (context) => AdatIstiadatPage(
+                            kabupaten: kabupaten,
+                          ),
                         ),
                       );
                     },
