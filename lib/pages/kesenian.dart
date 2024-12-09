@@ -1,84 +1,138 @@
+import 'package:budaya_bengkulu/pages/detail_lagu_daerah.dart';
+import 'package:budaya_bengkulu/pages/detail_pakaian_adat.dart';
+import 'package:budaya_bengkulu/pages/detail_senjata.dart';
+import 'package:budaya_bengkulu/pages/detail_tari_tradisional.dart';
+import 'package:budaya_bengkulu/pages/pilih_kabupaten.dart';
 import 'package:flutter/material.dart';
 
 class DetailKesenianPage extends StatelessWidget {
-  final List<KesenianDetailModel> kesenianDetails = [
-    KesenianDetailModel(
-      'Lagu Daerah',
-      'Lagu daerah adalah lagu-lagu tradisional yang sangat identik dengan budaya dan identitas suatu daerah. Lagu ini biasa dimainkan pada acara-acara tertentu yang berhubungan dengan budaya dan adat.',
-      'assets/music3.jpg',
-    ),
-    KesenianDetailModel(
-      'Pakaian Adat',
-      'Pakaian adat merupakan simbol budaya dan identitas dari suatu daerah. Setiap daerah memiliki pakaian adat yang berbeda-beda, yang biasanya dipakai dalam acara resmi atau upacara adat.',
-      'assets/367ba491fe4460d44becee0e83083c2b.jpg',
-    ),
-    KesenianDetailModel(
-      'Senjata Tradisional',
-      'Senjata tradisional adalah alat yang digunakan oleh masyarakat adat untuk keperluan berburu, pertahanan, dan sebagai simbol kekuatan atau status sosial.',
-      'assets/kerambit_169.jpeg',
-    ),
-    KesenianDetailModel(
-      'Tarian Tradisional',
-      'Tarian tradisional adalah tarian yang diwariskan turun-temurun dan menjadi bagian tak terpisahkan dari kebudayaan daerah. Setiap daerah memiliki tarian khas yang menggambarkan nilai-nilai budaya dan sejarah daerah tersebut.',
-      'assets/608baa9936f63.png',
-    ),
-  ];
+  final KabupatenModel kabupaten;
+
+  DetailKesenianPage({Key? key, required this.kabupaten}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kesenian Daerah"),
+        title: Text("Kesenian (${kabupaten.name})"),
         backgroundColor: Colors.green,
       ),
       body: Container(
-        color: Colors.white, // Background color of the page
-        child: ListView.builder(
-          padding: const EdgeInsets.all(16.0),
-          itemCount: kesenianDetails.length,
-          itemBuilder: (context, index) {
-            return KesenianDetailItem(kesenianDetail: kesenianDetails[index]);
-          },
+        color: Colors.white,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(6.0),
+                children: [
+                  _buildKategoriCard(
+                    context,
+                    title: "Lagu Daerah",
+                    description:
+                        "Lagu daerah adalah lagu-lagu tradisional yang sangat identik dengan budaya dan identitas suatu daerah. Lagu ini biasa dimainkan pada acara-acara tertentu yang berhubungan dengan budaya dan adat.",
+                    imagePath: 'assets/music3.jpg',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailLaguPage(
+                            kabupaten: kabupaten,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 6),
+                  _buildKategoriCard(
+                    context,
+                    title: "Pakaian Adat",
+                    description:
+                        "Pakaian adat merupakan simbol budaya dan identitas dari suatu daerah. Setiap daerah memiliki pakaian adat yang berbeda-beda, yang biasanya dipakai dalam acara resmi atau upacara adat.",
+                    imagePath: 'assets/367ba491fe4460d44becee0e83083c2b.jpg',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPakaianTradisionalPage(
+                            kabupaten: kabupaten,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 6),
+                  _buildKategoriCard(
+                    context,
+                    title: "Senjata Tradisional",
+                    description:
+                        "Senjata tradisional adalah alat yang digunakan oleh masyarakat adat untuk keperluan berburu, pertahanan, dan sebagai simbol kekuatan atau status sosial.",
+                    imagePath: 'assets/kerambit_169.jpeg',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsenjataTradisionalPage(
+                            kabupaten: kabupaten,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 6),
+                  _buildKategoriCard(
+                    context,
+                    title: "Tarian Tradisional",
+                    description:
+                        "Tarian tradisional adalah tarian yang diwariskan turun-temurun dan menjadi bagian tak terpisahkan dari kebudayaan daerah. Setiap daerah memiliki tarian khas yang menggambarkan nilai-nilai budaya dan sejarah daerah tersebut.",
+                    imagePath: 'assets/608baa9936f63.png',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailtariTradisionalPage(
+                            kabupaten: kabupaten,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-}
 
-class KesenianDetailModel {
-  final String title;
-  final String description;
-  final String imagePath;
-
-  KesenianDetailModel(this.title, this.description, this.imagePath);
-}
-
-class KesenianDetailItem extends StatelessWidget {
-  final KesenianDetailModel kesenianDetail;
-
-  const KesenianDetailItem({Key? key, required this.kesenianDetail})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildKategoriCard(BuildContext context,
+      {required String title,
+      required String description,
+      required String imagePath,
+      required VoidCallback onTap}) {
     return GestureDetector(
-      onTap: () {
-        // Action on tapping the item, you can navigate to a detailed page
-      },
+      onTap: onTap,
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6.0),
+          side: BorderSide(
+            color: Colors.green, // Warna hijau untuk stroke
+            width: 2, // Ketebalan stroke
+          ),
+        ),
         elevation: 5,
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: Colors.white, // Card background color
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Image.asset(
-                kesenianDetail.imagePath,
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6.0),
+                child: Image.asset(
+                  imagePath,
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -86,18 +140,17 @@ class KesenianDetailItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      kesenianDetail.title,
+                      title,
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      kesenianDetail.description,
+                      description,
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 16,
                         color: Colors.black54,
                       ),
                     ),
