@@ -15,22 +15,18 @@ class _KabupatenSelectionPageState extends State<KabupatenSelectionPage> {
   @override
   void initState() {
     super.initState();
-    fetchKabupatenData(); // Ambil data dari Firebase
+    fetchKabupatenData();
   }
 
-  // Fungsi untuk mengambil data dari Firebase
   void fetchKabupatenData() async {
     try {
       final snapshot =
           await database.child("-OCW6dIqvmXRFCCware0/kabupaten").get();
       if (snapshot.exists) {
-        // Mengambil data sebagai Map
         final data = snapshot.value as Map<dynamic, dynamic>;
 
-        // Mengonversi Map ke List
         final List<dynamic> kabupatenListFromMap = data.values.toList();
 
-        // Menyaring dan memproses data
         final tempList =
             kabupatenListFromMap.where((item) => item != null).map((item) {
           return {
