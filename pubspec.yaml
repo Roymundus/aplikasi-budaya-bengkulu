@@ -102,6 +102,9 @@ flutter:
     - assets/ritual.jpeg
     - assets/tradisi.jpg
     - assets/upacara-adat.jpg
+    - assets/header-lagu-daerah.jpg
+    - assets/header-senjata-tradisional.jpg
+    - assets/upacara-adat-bengkulu.jpg
 
     # - images/a_dot_ham.jpeg
 
