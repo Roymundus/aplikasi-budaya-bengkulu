@@ -106,7 +106,7 @@ class _TestPageState extends State<TestPage> {
                               valueColor: Colors.red,
                               backgroundColor: Color.fromARGB(255, 5, 188, 30),
                               initialPosition: 0,
-                              duration: 360,
+                              duration: 600,
                               timeFormatter: (seconds) {
                                 Duration duration = Duration(seconds: seconds);
                                 String twoDigits(int n) =>
