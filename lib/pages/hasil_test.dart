@@ -58,6 +58,7 @@ class _HasilPageState extends State<HasilPage> {
                     },
                     child: const Text("Kembali ke Menu Utama"),
                     style: ElevatedButton.styleFrom(
+                      // ignore: deprecated_member_use
                       primary: Color.fromARGB(255, 22, 119, 26), // Warna tombol
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30, vertical: 15),
