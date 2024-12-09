@@ -1,12 +1,11 @@
 import 'package:budaya_bengkulu/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart'; // Import file firebase_options.dart
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inisialisasi Firebase dengan opsi spesifik platform
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
