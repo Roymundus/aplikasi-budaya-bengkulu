@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:budaya_bengkulu/pages/pilih_kabupaten.dart'; // Pastikan ada model Kabupaten
+import 'package:budaya_bengkulu/pages/pilih_kabupaten.dart';
 
 class DetailBahasaPage extends StatefulWidget {
   final KabupatenModel kabupaten;
