@@ -116,8 +116,8 @@ class DetailKesenianPage extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.0),
           side: BorderSide(
-            color: Colors.green, // Warna hijau untuk stroke
-            width: 2, // Ketebalan stroke
+            color: Colors.green,
+            width: 2,
           ),
         ),
         elevation: 5,
