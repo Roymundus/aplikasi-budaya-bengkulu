@@ -1,4 +1,4 @@
-package com.example.budaya_bengkulu
+package com.budayabengkulu.roy
 
 import io.flutter.embedding.android.FlutterActivity
 

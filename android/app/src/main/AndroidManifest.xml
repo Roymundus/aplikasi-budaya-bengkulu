@@ -5,7 +5,7 @@
     <application
         android:label="Budaya Bengkulu"
         android:name="androidx.multidex.MultiDexApplication"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/logoapps">
         <activity
             android:name=".MainActivity"
             android:exported="true"
