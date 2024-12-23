@@ -14,8 +14,12 @@ class KategoriBudayaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kategori Budaya (${kabupaten.name})"),
+        title: Text(
+          "Kategori Budaya (${kabupaten.name})",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
         color: Colors.white,

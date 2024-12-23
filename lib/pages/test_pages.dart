@@ -18,6 +18,15 @@ class _TestPageState extends State<TestPage> {
   final _controller = CountDownController();
   int index = 0;
   int result = 0;
+  shuffleQuestions() {
+    widget.questionModel.data.shuffle();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    shuffleQuestions();
+  }
 
   void navigate(String optionChar) {
     setState(() {
@@ -65,16 +74,6 @@ class _TestPageState extends State<TestPage> {
       ),
       body: Stack(
         children: [
-          // // Gambar latar belakang
-          // Positioned.fill(
-          //   child: Opacity(
-          //     opacity: 1.0,
-          //     child: Image.asset(
-          //       'assets/background-kuis.png',
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          // ),
           SafeArea(
             child: LayoutBuilder(
               builder: (context, constraints) {

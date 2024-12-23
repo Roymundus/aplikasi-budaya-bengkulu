@@ -57,8 +57,12 @@ class _KabupatenSelectionPageState extends State<KabupatenSelectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pilih Kabupaten"),
+        title: const Text(
+          "Pilih Kabupaten",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())

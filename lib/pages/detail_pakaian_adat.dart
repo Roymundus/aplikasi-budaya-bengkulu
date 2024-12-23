@@ -121,8 +121,10 @@ class _DetailPakaianTradisionalPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pakaian Tradisional (${widget.kabupaten.name})"),
+        title: Text("Pakaian Tradisional (${widget.kabupaten.name})",
+            style: const TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
         color: Colors.white,
@@ -219,8 +221,8 @@ class _DetailPakaianTradisionalPageState
                       icon: const Icon(Icons.refresh),
                       label: const Text("Coba Lagi"),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
-                        onPrimary: Colors.white,
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
                       ),
                     ),
                   ],

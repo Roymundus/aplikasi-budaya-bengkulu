@@ -16,8 +16,9 @@ class _HasilPageState extends State<HasilPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hasil Kuis"),
-        backgroundColor: Colors.green, // Sesuaikan warna sesuai keinginan
+        title: const Text("Hasil Kuis", style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Stack(
         children: [
@@ -56,10 +57,14 @@ class _HasilPageState extends State<HasilPage> {
                     onPressed: () {
                       Navigator.popUntil(context, (route) => route.isFirst);
                     },
-                    child: const Text("Kembali ke Menu Utama"),
+                    child: const Text(
+                      "Kembali ke Menu Utama",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     style: ElevatedButton.styleFrom(
                       // ignore: deprecated_member_use
-                      primary: Color.fromARGB(255, 22, 119, 26), // Warna tombol
+                      backgroundColor:
+                          Color.fromARGB(255, 22, 119, 26), // Warna tombol
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30, vertical: 15),
                       textStyle: const TextStyle(

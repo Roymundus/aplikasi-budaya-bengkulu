@@ -128,8 +128,10 @@ class _DetailsenjataTradisionalPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Senjata Tradisional"),
+        title: Text("Senjata Tradisional",
+            style: const TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
         color: Colors.white,
@@ -230,8 +232,8 @@ class _DetailsenjataTradisionalPageState
                       icon: const Icon(Icons.refresh),
                       label: const Text("Coba Lagi"),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
-                        onPrimary: Colors.white,
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
                       ),
                     ),
                   ],

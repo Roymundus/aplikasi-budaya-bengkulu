@@ -87,8 +87,12 @@ class _DetailBahasaPageState extends State<DetailBahasaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bahasa Daerah ${widget.kabupaten.name}"),
+        title: Text(
+          "Bahasa Daerah ${widget.kabupaten.name}",
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
         color: Colors.white,

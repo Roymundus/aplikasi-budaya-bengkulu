@@ -76,8 +76,10 @@ class _DetailLaguPageState extends State<DetailLaguPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lagu Daerah - ${widget.kabupaten.name}"),
+        title: Text("Lagu Daerah - ${widget.kabupaten.name}",
+            style: const TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
         color: Colors.white,

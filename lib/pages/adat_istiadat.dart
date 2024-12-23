@@ -226,8 +226,8 @@ class _AdatIstiadatPageState extends State<AdatIstiadatPage> {
                       icon: const Icon(Icons.refresh),
                       label: const Text("Coba Lagi"),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
-                        onPrimary: Colors.white,
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
                       ),
                     ),
                   ],

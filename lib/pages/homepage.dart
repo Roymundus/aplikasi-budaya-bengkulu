@@ -7,7 +7,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ensiklopedia Budaya Bengkulu'),
+        title: Text(
+          'Ensiklopedia Budaya Bengkulu',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),

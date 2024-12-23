@@ -56,14 +56,20 @@ class _HomePageState extends State<HomeKuis> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.pop(context); // Aksi untuk tombol kembali
           },
         ),
         title: Align(
           alignment: Alignment.centerLeft,
-          child: const Text('Kuis Ensiklopedia Budaya Bengkulu'),
+          child: const Text(
+            'Kuis Ensiklopedia Budaya Bengkulu',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
       body: Stack(
@@ -112,9 +118,12 @@ class _HomePageState extends State<HomeKuis> {
                             onPressed: () {
                               getAllData(usernameController.text);
                             },
-                            child: const Text("Mulai Kuis"),
+                            child: const Text(
+                              "Mulai Kuis",
+                              style: TextStyle(color: Colors.white),
+                            ),
                             style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(
+                              backgroundColor: Color.fromARGB(
                                   255, 22, 119, 26), // Warna tombol
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 30, vertical: 15),

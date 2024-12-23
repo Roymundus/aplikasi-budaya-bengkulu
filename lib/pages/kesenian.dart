@@ -14,8 +14,10 @@ class DetailKesenianPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kesenian (${kabupaten.name})"),
+        title: Text("Kesenian (${kabupaten.name})",
+            style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
         color: Colors.white,
